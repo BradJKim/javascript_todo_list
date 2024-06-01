@@ -1,9 +1,11 @@
+import { v4 } from "uuid";
+
 export default class Task {
     // Private Variables
     #id;
 
     constructor() {
-        this.#id = 1; // self asign
+        this.#id = v4(); // self asign
         this.title = "New Task";
         this.description = "";
         this.dueDate = ""; // date-fns
@@ -11,6 +13,12 @@ export default class Task {
         this.checked = false;
     }
 
+    // Get Accessor for description property
+    get getId() {
+        return this.#id;
+    }
+
+    // Accessors for title property
     get getTitle() {
         return this.title;
     }

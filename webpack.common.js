@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -9,6 +10,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html",
         }),
+        new NodePolyfillPlugin({
+			additionalAliases: ['process', 'punycode'],
+		}),
     ],
     output: {
         filename: "[name].bundle.js",
@@ -23,4 +27,5 @@ module.exports = {
             },
         ],
     },
+    
 };
