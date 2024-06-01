@@ -1,9 +1,10 @@
 import Task from "../../models/task.js";
+import TaskLoader from "../../../utils/taskLoader/taskLoader.js";
 import "./style.css";
 
-export default function TaskComponent(projectID) {
+export default function TaskComponent(projectID, taskObject) {
     const parentProjectID = projectID;
-    const task = new Task();
+    const task = taskObject != null ? taskObject : new Task();
     const element = document.createElement("div");
     element.className = "task";
 
@@ -25,18 +26,9 @@ export default function TaskComponent(projectID) {
     menuButton.innerHTML = "details";
     element.append(menuButton);
 
-    const taskString = JSON.stringify(task);
+    
 
-    localStorage.setItem(
-        `project#${parentProjectID}:task#${task.getId}`, taskString
-    );
-
-    /* const loadedTaskString = localStorage.getItem(
-        `project#${parentProjectID}:task#${task.getId}`
-    );
-
-    const loadedTask = JSON.parse(loadedTaskString)
-    console.log(loadedTask) */
+    
 
     return element;
 }
