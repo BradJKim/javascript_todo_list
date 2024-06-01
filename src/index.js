@@ -1,7 +1,7 @@
-import Task from "./components/task/task.js";
+import TaskComponent from "./components/task/taskComponent.js";
 
 const content = document.querySelector("#content");
 
-const taskEx = Task();
+const taskEx = TaskComponent();
 
 console.log(taskEx);
