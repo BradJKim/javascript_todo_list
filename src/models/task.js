@@ -11,42 +11,42 @@ export default class Task {
         this.checked = false;
     }
 
-    get title() {
+    get getTitle() {
         return this.title;
     }
-    set title(title) {
+    set setTitle(title) {
         this.title = title;
     }
 
     // Accessors for description property
-    get description() {
+    get getDescription() {
         return this.description;
     }
-    set description(description) {
+    set setDescription(description) {
         this.description = description;
     }
 
     // Accessors for dueDate property
-    get dueDate() {
+    get getDueDate() {
         return this.dueDate;
     }
-    set dueDate(dueDate) {
+    set setDueDate(dueDate) {
         this.dueDate = dueDate;
     }
 
     // Accessors for priority property
-    get priority() {
+    get getPriority() {
         return this.priority;
     }
-    set priority(priority) {
+    set setPriority(priority) {
         this.priority = priority;
     }
 
     // Accessors for checked property
-    get checked() {
+    get getChecked() {
         return this.checked;
     }
-    set checked(checked) {
+    set setChecked(checked) {
         this.checked = checked;
     }
 

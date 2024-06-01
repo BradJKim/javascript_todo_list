@@ -5,3 +5,5 @@ const content = document.querySelector("#content");
 const taskEx = TaskComponent();
 
 console.log(taskEx);
+
+content.appendChild(taskEx);
