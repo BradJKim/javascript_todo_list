@@ -3,16 +3,11 @@ import TaskLoader from "../../../utils/taskLoader/taskLoader.js";
 import "./style.css";
 
 export default function TaskComponent(taskObject) {
-    const task = taskObject != null ? taskObject : new Task();
     const element = document.createElement("div");
+    const task = taskObject != null ? taskObject : new Task();
     element.className = "task";
-
-    //TODO: handling html component using data from task
-
-    // Simple box with 3 dots
-    // expand with description and other info on top of dom
-    // click x to get rid of it
-
+    element.id = `task#${task.getId}`;
+    
     // function for enabling visibility of task extention
     function toggleExtension() {
         const taskExtension = element.children[0];
