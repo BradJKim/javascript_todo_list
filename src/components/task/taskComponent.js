@@ -1,5 +1,4 @@
 import Task from "../../models/task.js";
-import TaskLoader from "../../../utils/taskLoader/taskLoader.js";
 import "./style.css";
 
 export default function TaskComponent(taskObject) {

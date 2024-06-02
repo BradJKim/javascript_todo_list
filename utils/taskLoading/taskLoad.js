@@ -5,6 +5,6 @@
         taskString
     ); */
 
-export default (function TaskLoader() {
+export default function loadTasks() {
     
-})();
+};

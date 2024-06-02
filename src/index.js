@@ -1,8 +1,13 @@
-import TaskComponent from "./components/task/taskComponent.js";
+import addTask from "../utils/taskAdding/taskAdd.js";
 
-const content = document.querySelector("#content");
+const content = document.querySelector("#tasks");
 
-const taskEx = TaskComponent();
-content.appendChild(taskEx);
+const taskAdderbutton = document.createElement("button");
+taskAdderbutton.innerHTML = "Add New Tasks";
+taskAdderbutton.addEventListener('click', () => {addTask()});
+content.appendChild(taskAdderbutton);
 
+// taskAdd handle adding to dom and logging in localstorage
 
+/* const taskEx = TaskComponent();
+content.appendChild(taskEx); */
