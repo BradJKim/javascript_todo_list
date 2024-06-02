@@ -1,3 +1,4 @@
+import { deleteTask } from "../../../utils/taskControlling/taskControll.js";
 import Task from "../../models/task.js";
 import "./style.css";
 
@@ -56,6 +57,14 @@ export default function TaskComponent(taskObject) {
     extensionButton.addEventListener("click", (e) => {toggleExtension()});
     
     element.append(extensionButton);
+
+    // Delete task button
+    const deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "delete";
+    deleteButton.className = "deleteButton";
+    deleteButton.addEventListener("click", (e) => {deleteTask(element.id)}); 
+    
+    element.append(deleteButton);
 
     return element;
 }

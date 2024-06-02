@@ -1,4 +1,4 @@
-import addTask from "../utils/taskAdding/taskAdd.js";
+import { addTask } from "../utils/taskControlling/taskControll";
 
 const content = document.querySelector("#tasks");
 
