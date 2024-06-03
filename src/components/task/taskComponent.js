@@ -1,4 +1,4 @@
-import { deleteTask } from "../../../utils/taskComponentControlling/taskControll.js";
+import { deleteTask } from "../../../utils/taskComponentControlling/taskControl.js";
 import Task from "../../models/task.js";
 import {
     getTask,

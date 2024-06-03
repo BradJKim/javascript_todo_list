@@ -2,14 +2,11 @@
 // returns 0 if successful, returns 1 if unsuccessful
 function unstoreTask(parentProjectID, taskID) {
     try {
-        
         if (ifTaskExists(parentProjectID, taskID) == false) {
             throw new Error("Task does not exist in localStorage");
         }
 
-        localStorage.removeItem(
-            `${parentProjectID}${taskID}`
-        );
+        localStorage.removeItem(`${parentProjectID}${taskID}`);
 
         return 0;
     } catch (error) {
@@ -37,29 +34,26 @@ function storeTask(parentProjectID, taskID, taskObject) {
 // returns task if successful, returns false if unsuccessful
 function getTask(parentProjectID, taskID) {
     try {
+        if (ifTaskExists(parentProjectID, taskID) == false) {
+            throw new Error("Task does not exist in localStorage");
+        }
 
         const loadedTaskString = localStorage.getItem(
             `${parentProjectID}${taskID}`
         );
-
-        if (ifTaskExists(parentProjectID, taskID) == false) {
-            throw new Error("Task does not exist in localStorage");
-        }
 
         const returnedTask = JSON.parse(loadedTaskString);
 
         return returnedTask;
     } catch (error) {
         console.log(error);
-        return false;
+        return null;
     }
 }
 
 // updates task in localStorage
 // returns 0 if successful, returns 1 if unsuccessful
-function updateTask(){
-
-}
+function updateTask() {}
 
 // checks if task exists in localStorage
 // returns true if exists, returns false is does not exist
