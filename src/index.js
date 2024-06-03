@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { addTask } from "../utils/taskComponentControlling/taskControl";
+import { addTask, loadTasks } from "../utils/taskComponentControlling/taskControl";
 
 const content = document.querySelector("#tasks");
 
@@ -13,7 +13,7 @@ taskAdderbutton.addEventListener("click", () => {
 content.appendChild(taskAdderbutton);
 
 // loading task components to index
-
+loadTasks("project#123");
 
 
 

@@ -1,13 +1,21 @@
 import TaskComponent from "../../src/components/task/taskComponent";
 
-// loads tasks from local storage to project page
+// iterates through localStorage to find tasks with projectID and loads tasks from local storage to project page
 function loadTasks(projectID) {
-    /* const taskString = JSON.stringify(task);
+    const tasksList = document.querySelector("#tasks");
+    let taskNames = [];
 
-    localStorage.getItem(
-        `project#${parentProjectID}:task#${task.getId}`,
-        taskString
-    ); */
+    Object.keys(localStorage)
+        .filter((taskName) => taskName.startsWith(projectID))
+        .forEach((taskName) => {
+            const indexOfTask = taskName.lastIndexOf("task");
+            taskNames.push(taskName.substring(indexOfTask));
+        });
+
+    taskNames.forEach((taskID) => {
+        const loadedTask = TaskComponent(projectID, taskID);
+        tasksList.appendChild(loadedTask);
+    });
 }
 
 // adds task to project page
@@ -24,8 +32,6 @@ function deleteTask(taskID) {
     taskComponent.remove();
 }
 
-function updateTask(projectID, taskID){
-
-}
+function updateTask(projectID, taskID) {}
 
 export { addTask, deleteTask, loadTasks, updateTask };
