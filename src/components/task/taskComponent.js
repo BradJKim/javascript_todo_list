@@ -1,4 +1,4 @@
-import { deleteTask } from "../../../utils/taskComponentControlling/taskControl.js";
+import { deleteTask } from "../../../utils/componentControlling/boardControl.js";
 import Task from "../../models/task.js";
 import {
     getTask,
@@ -11,8 +11,8 @@ import "./style.css";
 export default function TaskComponent(projectID, taskID) {
     const parentProjectID = projectID;
     const elementTaskID = taskID;
-    const element = document.createElement("div");
     let task = new Task(taskID);
+    const element = document.createElement("div");
     element.className = "task";
     element.id = taskID;
 
@@ -57,11 +57,7 @@ export default function TaskComponent(projectID, taskID) {
 
     element.append(taskExtension);
 
-    
-    
     // end of task extension elements //
-
-
 
     // Checkbox to access check property
     const checkBox = document.createElement("input"); // make green if checked

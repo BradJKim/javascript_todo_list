@@ -1,7 +1,16 @@
 import TaskComponent from "../../src/components/task/taskComponent";
+import ProjectComponent from "../../src/components/project/projectComponent";
+
+// adds new project to project board
+function addProject(projectID) {
+    const projectsList = document.querySelector("#projects");
+
+    const newProject = ProjectComponent(projectID);
+    projectsList.appendChild(newProject);
+}
 
 // iterates through localStorage to find tasks with projectID and loads tasks from local storage to project page
-function loadTasks(projectID) {
+function reloadTasks(projectID) {
     const tasksList = document.querySelector("#tasks");
     let taskNames = [];
 
@@ -12,13 +21,19 @@ function loadTasks(projectID) {
             taskNames.push(taskName.substring(indexOfTask));
         });
 
+    tasksList.childNodes.forEach((child) => {
+        if (child.className == "task"){
+            tasksList.removeChild(child);
+        }
+    });
+
     taskNames.forEach((taskID) => {
         const loadedTask = TaskComponent(projectID, taskID);
         tasksList.appendChild(loadedTask);
     });
 }
 
-// adds task to project page
+// adds task to task board
 function addTask(projectID, taskID) {
     const tasksList = document.querySelector("#tasks");
 
@@ -26,7 +41,7 @@ function addTask(projectID, taskID) {
     tasksList.appendChild(newTask);
 }
 
-// deletes task from project page
+// deletes task from task board
 function deleteTask(taskID) {
     const taskComponent = document.getElementById(taskID);
     taskComponent.remove();
@@ -34,4 +49,4 @@ function deleteTask(taskID) {
 
 function updateTask(projectID, taskID) {}
 
-export { addTask, deleteTask, loadTasks, updateTask };
+export { addProject, addTask, deleteTask, reloadTasks, updateTask };

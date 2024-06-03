@@ -1,0 +1,7 @@
+.project {
+    border: solid pink 2px;
+}
+
+.selected{
+    border: solid green 5px;
+}
