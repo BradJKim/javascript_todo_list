@@ -1,3 +1,92 @@
+// returns array of all projects in local storage
+function getProjects() {
+    const projectNames = [];
+
+    Object.keys(localStorage)
+        .filter((projectName) => !projectName.includes("task"))
+        .forEach((projectName) => {
+            projectNames.push(projectName);
+        });
+
+    return projectNames;
+}
+
+function getProject(projectID) {
+    try {
+        if (ifProjectExists(projectID) == false) {
+            throw new Error("Task does not exist in localStorage");
+        }
+
+        const loadedProjectString = localStorage.getItem(projectID);
+
+        const returnedProject = JSON.parse(loadedProjectString);
+
+        return returnedProject;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+// adds project to local storage
+function storeProject(projectID, projectObject) {
+    try {
+        const stringedProjectObject = JSON.stringify(projectObject);
+
+        localStorage[`${projectID}`] = stringedProjectObject;
+
+        return 0;
+    } catch (error) {
+        console.log(error);
+        return 1;
+    }
+}
+
+// gets all tasks from local storage with projectID
+function getTasks(projectID) {
+    const taskNames = [];
+
+    Object.keys(localStorage)
+        .filter((taskName) => taskName.startsWith(projectID))
+        .forEach((taskName) => {
+            const indexOfTask = taskName.lastIndexOf("task");
+            if (indexOfTask > -1){
+                taskNames.push(taskName.substring(indexOfTask));
+            }
+        });
+
+    return taskNames;
+}
+
+// removes project from local storage
+function removeProject(projectID) {
+    try {
+        if (ifProjectExists(projectID) == false) {
+            throw new Error("Project does not exist in localStorage");
+        }
+
+        localStorage.removeItem(projectID);
+
+        return 0;
+    } catch (error) {
+        console.log(error);
+        return 1;
+    }
+}
+
+// returns if project exists
+function ifProjectExists(projectID) {
+    const loadedProjectString = localStorage.getItem(projectID);
+
+    if (loadedProjectString) {
+        return true;
+    }
+
+    return false;
+}
+
+// updates project in local storage
+
 // removes task from local storage
 // returns 0 if successful, returns 1 if unsuccessful
 function unstoreTask(parentProjectID, taskID) {
@@ -69,4 +158,15 @@ function ifTaskExists(parentProjectID, taskID) {
     return false;
 }
 
-export { storeTask, unstoreTask, getTask, ifTaskExists };
+export {
+    getProjects,
+    getProject,
+    storeProject,
+    removeProject,
+    storeTask,
+    unstoreTask,
+    getTask,
+    ifTaskExists,
+    ifProjectExists,
+    getTasks,
+};

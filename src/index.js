@@ -1,9 +1,11 @@
 import { v4 } from "uuid";
 import {
     addProject,
+    loadProjects,
     addTask,
     reloadTasks,
 } from "../utils/componentControlling/boardControl";
+import { getProjects } from "../utils/localStorageHandling/localStorageHandler";
 
 const projectBoard = document.querySelector("#projects");
 const taskList = document.querySelector("#tasks");
@@ -11,19 +13,21 @@ const taskList = document.querySelector("#tasks");
 let currentProjectID = "";
 
 // helper function for adding clickable wrapper div for current project id
-function applyProjectWrapper(projectID){
+function applyProjectWrapper(projectID) {
     const wrapper = document.createElement("div");
     const projectElement = document.getElementById(projectID);
     wrapper.addEventListener("click", () => {
-        if (currentProjectID != ""){
-            const currentProjectElement = document.getElementById(currentProjectID);
+        if (currentProjectID != "") {
+            const currentProjectElement =
+                document.getElementById(currentProjectID);
             currentProjectElement.classList.toggle("selected");
         }
 
         currentProjectID = projectElement.id;
-        console.log(`projectid:${currentProjectID}`);
 
         projectElement.classList.toggle("selected");
+
+        reloadTasks(currentProjectID);
     });
 
     wrapper.appendChild(projectElement);
@@ -44,16 +48,22 @@ projectBoard.appendChild(projectAdderButton);
 const taskAdderButton = document.createElement("button");
 taskAdderButton.innerHTML = "Add New Task";
 taskAdderButton.addEventListener("click", () => {
-    if (currentProjectID == ""){
-        alert("Project not selected, please select a project before adding tasks");
-    }
-    else{
+    if (currentProjectID == "") {
+        alert(
+            "Project not selected, please select a project before adding tasks"
+        );
+    } else {
         const id = v4();
         addTask(currentProjectID, `task#${id}`);
     }
-    
 });
 taskList.appendChild(taskAdderButton);
 
-// loading task components to index
-reloadTasks("currentProjectID");
+// loads projects to index
+loadProjects();
+
+// Apply wrapper to each project
+const projects = getProjects();
+projects.forEach((projectID) => {
+    applyProjectWrapper(projectID);
+});
