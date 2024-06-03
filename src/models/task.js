@@ -1,11 +1,9 @@
-import { v4 } from "uuid";
-
 export default class Task {
     // Private Variables
     #id;
 
-    constructor() {
-        this.#id = v4(); // self asign
+    constructor(id) {
+        this.#id = id; 
         this.title = "New Task";
         this.description = "";
         this.dueDate = ""; // date-fns

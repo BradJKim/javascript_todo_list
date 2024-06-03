@@ -1,13 +1,29 @@
-import { deleteTask } from "../../../utils/taskControlling/taskControll.js";
+import { deleteTask } from "../../../utils/taskComponentControlling/taskControll.js";
 import Task from "../../models/task.js";
+import {
+    getTask,
+    storeTask,
+    unstoreTask,
+    ifTaskExists,
+} from "../../../utils/localStorageHandling/localStorageHandler.js";
 import "./style.css";
 
-export default function TaskComponent(taskObject) {
+export default function TaskComponent(projectID, taskID) {
+    const parentProjectID = projectID;
+    const elementTaskID = taskID;
     const element = document.createElement("div");
-    const task = taskObject != null ? taskObject : new Task();
+    let task = new Task(taskID);
     element.className = "task";
-    element.id = `task#${task.getId}`;
-    
+    element.id = taskID;
+
+    // assign existing task if task exists
+    if (ifTaskExists(taskID) == true) {
+        task = getTask(taskID);
+    } else {
+        // init store task in local storage
+        storeTask(parentProjectID, elementTaskID, task);
+    }
+
     // function for enabling visibility of task extention
     function toggleExtension() {
         const taskExtension = element.children[0];
@@ -20,7 +36,9 @@ export default function TaskComponent(taskObject) {
 
     const exitButton = document.createElement("button");
     exitButton.textContent = "exit";
-    exitButton.addEventListener('click', (e) => {toggleExtension()})
+    exitButton.addEventListener("click", (e) => {
+        toggleExtension();
+    });
 
     taskExtension.appendChild(exitButton);
 
@@ -54,16 +72,21 @@ export default function TaskComponent(taskObject) {
     const extensionButton = document.createElement("button");
     extensionButton.innerHTML = "details";
     extensionButton.className = "menuButton";
-    extensionButton.addEventListener("click", (e) => {toggleExtension()});
-    
+    extensionButton.addEventListener("click", (e) => {
+        toggleExtension();
+    });
+
     element.append(extensionButton);
 
     // Delete task button
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = "delete";
     deleteButton.className = "deleteButton";
-    deleteButton.addEventListener("click", (e) => {deleteTask(element.id)}); 
-    
+    deleteButton.addEventListener("click", (e) => {
+        deleteTask(element.id);
+        unstoreTask(parentProjectID, task.getId);
+    });
+
     element.append(deleteButton);
 
     return element;
