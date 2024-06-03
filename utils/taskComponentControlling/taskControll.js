@@ -24,4 +24,8 @@ function deleteTask(taskID) {
     taskComponent.remove();
 }
 
-export { addTask, deleteTask, loadTasks };
+function updateTask(projectID, taskID){
+
+}
+
+export { addTask, deleteTask, loadTasks, updateTask };

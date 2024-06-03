@@ -16,11 +16,10 @@ export default function TaskComponent(projectID, taskID) {
     element.className = "task";
     element.id = taskID;
 
-    // assign existing task if task exists
+    // assign existing task if task exists, else store task in local storage
     if (ifTaskExists(taskID) == true) {
         task = getTask(taskID);
     } else {
-        // init store task in local storage
         storeTask(parentProjectID, elementTaskID, task);
     }
 
@@ -57,6 +56,12 @@ export default function TaskComponent(projectID, taskID) {
     taskExtension.appendChild(description);
 
     element.append(taskExtension);
+
+    
+    
+    // end of task extension elements //
+
+
 
     // Checkbox to access check property
     const checkBox = document.createElement("input"); // make green if checked
