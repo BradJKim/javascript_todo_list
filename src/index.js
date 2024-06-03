@@ -44,10 +44,16 @@ projectBoard.appendChild(projectAdderButton);
 const taskAdderButton = document.createElement("button");
 taskAdderButton.innerHTML = "Add New Task";
 taskAdderButton.addEventListener("click", () => {
-    const id = v4();
-    addTask("project#123", `task#${id}`);
+    if (currentProjectID == ""){
+        alert("Project not selected, please select a project before adding tasks");
+    }
+    else{
+        const id = v4();
+        addTask(currentProjectID, `task#${id}`);
+    }
+    
 });
 taskList.appendChild(taskAdderButton);
 
 // loading task components to index
-reloadTasks("project#123");
+reloadTasks("currentProjectID");
