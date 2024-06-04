@@ -11,6 +11,7 @@ function getProjects() {
     return projectNames;
 }
 
+// returns project from local storage
 function getProject(projectID) {
     try {
         if (ifProjectExists(projectID) == false) {
@@ -59,7 +60,7 @@ function getTasks(projectID) {
 }
 
 // removes project from local storage
-function removeProject(projectID) {
+function unstoreProject(projectID) {
     try {
         if (ifProjectExists(projectID) == false) {
             throw new Error("Project does not exist in localStorage");
@@ -162,7 +163,7 @@ export {
     getProjects,
     getProject,
     storeProject,
-    removeProject,
+    unstoreProject,
     storeTask,
     unstoreTask,
     getTask,

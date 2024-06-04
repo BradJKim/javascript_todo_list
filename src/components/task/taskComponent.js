@@ -84,7 +84,7 @@ export default function TaskComponent(projectID, taskID) {
     deleteButton.innerHTML = "delete";
     deleteButton.className = "deleteButton";
     deleteButton.addEventListener("click", (e) => {
-        deleteTask(element.id);
+        removeTask(element.id);
         unstoreTask(parentProjectID, task.getId);
     });
 

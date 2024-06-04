@@ -1,6 +1,6 @@
 import TaskComponent from "../../src/components/task/taskComponent";
 import ProjectComponent from "../../src/components/project/projectComponent";
-import { getProjects, getTasks, storeProject } from "../localStorageHandling/localStorageHandler";
+import { getProjects, getTasks } from "../localStorageHandling/localStorageHandler";
 
 // adds new project to project board
 function addProject(projectID) {
@@ -12,7 +12,10 @@ function addProject(projectID) {
 
 // remove project form project board
 function removeProject(projectID){
-
+    const projectComponent = document.getElementById(projectID);
+    if (projectComponent != null){
+        projectComponent.remove();
+    }
 }
 
 // loads projects from local storage
@@ -50,15 +53,17 @@ function addTask(projectID, taskID) {
     const tasksList = document.querySelector("#tasks");
 
     const newTask = TaskComponent(projectID, taskID);
-    tasksList.insertBefore(newTask, tasksList.children[0]);
+    tasksList.appendChild(newTask);
 }
 
 // deletes task from task board
-function deleteTask(taskID) {
+function removeTask(taskID) {
     const taskComponent = document.getElementById(taskID);
-    taskComponent.remove();
+    if (taskComponent != null){
+        taskComponent.remove();
+    }
 }
 
 function updateTask(projectID, taskID) {}
 
-export { addProject, removeProject, loadProjects, addTask, deleteTask, reloadTasks, updateTask };
+export { addProject, removeProject, loadProjects, addTask, removeTask, reloadTasks, updateTask };
