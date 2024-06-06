@@ -1,3 +1,3 @@
 ### Javascript Todo List
 
-sample text
+Javascript Example Todo List that saves projects and related tasks using local storage on the browser. User can create and select a project an then add tasks according to each project. Editing project and task attributes have not been implemented. One desing implmentation I would change if I had more time is to start from scratch and implement the components first fully, then move on to larger application features and relations. Because of desires to first implement the larger picture, proper functionality for components was not created or refined, until after features became complex and dependant.
