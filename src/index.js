@@ -18,7 +18,7 @@ let currentProjectID = "";
 // helper function for adding clickable wrapper div for current project id and seperate delete project button
 function applyProjectWrapper(projectID) {
     const wrapper = document.createElement("div");
-    const projectElement = document.getElementById(projectID);
+    const projectElement = document.getElementById(projectID); 
     wrapper.addEventListener("click", () => {
         if (currentProjectID != "") { 
             const currentProjectElement =

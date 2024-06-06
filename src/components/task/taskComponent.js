@@ -1,4 +1,4 @@
-import { deleteTask } from "../../../utils/componentControlling/boardControl.js";
+import { removeTask } from "../../../utils/componentControlling/boardControl.js";
 import Task from "../../models/task.js";
 import {
     getTask,
@@ -7,6 +7,7 @@ import {
     ifTaskExists,
 } from "../../../utils/localStorageHandling/localStorageHandler.js";
 import "./style.css";
+import TaskEditComponent from "../taskEdit/taskEditComponent.js";
 
 export default function TaskComponent(projectID, taskID) {
     const parentProjectID = projectID;

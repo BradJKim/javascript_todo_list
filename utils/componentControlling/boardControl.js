@@ -1,5 +1,6 @@
 import TaskComponent from "../../src/components/task/taskComponent";
 import ProjectComponent from "../../src/components/project/projectComponent";
+import TaskEditComponent from "../../src/components/taskEdit/taskEditComponent";
 import { getProjects, getTasks } from "../localStorageHandling/localStorageHandler";
 
 // adds new project to project board
@@ -21,6 +22,14 @@ function removeProject(projectID){
 // loads projects from local storage
 function loadProjects(){
     const projectsList = document.querySelector("#projects");
+    const children = projectsList.getElementsByClassName("project")
+
+    Array.from(children).forEach((child) => {
+        if (child.classList.contains("project")) {
+            tasksList.removeChild(child);
+        }
+    });
+
     const projectNames = getProjects();
 
     projectNames.forEach((projectID) => {
@@ -28,6 +37,11 @@ function loadProjects(){
         projectsList.appendChild(loadedProject);
     });
 }
+
+function updateProjectView(projectID, taskID) {
+
+}
+
 
 // iterates through localStorage to find tasks with projectID and loads tasks from local storage to project page
 function reloadTasks(projectID) {
@@ -44,6 +58,15 @@ function reloadTasks(projectID) {
 
     taskNames.forEach((taskID) => {
         const loadedTask = TaskComponent(projectID, taskID);
+
+        const editButton = document.createElement("button");
+        editButton.innerHTML = "edit";
+        editButton.className = "editButton";
+        editButton.addEventListener("click", (e) => {
+            const editForm = TaskEditComponent(projectID, taskID);
+            tasksList.appendChild(editForm);
+        });
+
         tasksList.appendChild(loadedTask);
     });
 }
@@ -53,6 +76,17 @@ function addTask(projectID, taskID) {
     const tasksList = document.querySelector("#tasks");
 
     const newTask = TaskComponent(projectID, taskID);
+
+    const editButton = document.createElement("button");
+    editButton.innerHTML = "edit";
+    editButton.className = "editButton";
+    editButton.addEventListener("click", (e) => {
+        const editForm = TaskEditComponent(projectID, taskID);
+        tasksList.appendChild(editForm);
+    });
+
+    newTask.appendChild(editButton);
+
     tasksList.appendChild(newTask);
 }
 
@@ -64,6 +98,11 @@ function removeTask(taskID) {
     }
 }
 
-function updateTask(projectID, taskID) {}
+function updateTaskView(projectID, taskID) {
+    const taskComponent = document.getElementById(taskID);
+    const newTaskComponent = TaskComponent(projectID, taskID);
 
-export { addProject, removeProject, loadProjects, addTask, removeTask, reloadTasks, updateTask };
+    taskComponent.replaceWith(newTaskComponent);
+}
+
+export { addProject, removeProject, loadProjects, updateProjectView, addTask, removeTask, reloadTasks, updateTaskView };

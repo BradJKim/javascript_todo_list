@@ -1,3 +1,4 @@
+
 // returns array of all projects in local storage
 function getProjects() {
     const projectNames = [];
@@ -43,22 +44,6 @@ function storeProject(projectID, projectObject) {
     }
 }
 
-// gets all tasks from local storage with projectID
-function getTasks(projectID) {
-    const taskNames = [];
-
-    Object.keys(localStorage)
-        .filter((taskName) => taskName.startsWith(projectID))
-        .forEach((taskName) => {
-            const indexOfTask = taskName.lastIndexOf("task");
-            if (indexOfTask > -1){
-                taskNames.push(taskName.substring(indexOfTask));
-            }
-        });
-
-    return taskNames;
-}
-
 // removes project from local storage
 function unstoreProject(projectID) {
     try {
@@ -84,6 +69,22 @@ function ifProjectExists(projectID) {
     }
 
     return false;
+}
+
+// gets all tasks from local storage with projectID
+function getTasks(projectID) {
+    const taskNames = [];
+
+    Object.keys(localStorage)
+        .filter((taskName) => taskName.startsWith(projectID))
+        .forEach((taskName) => {
+            const indexOfTask = taskName.lastIndexOf("task");
+            if (indexOfTask > -1) {
+                taskNames.push(taskName.substring(indexOfTask));
+            }
+        });
+
+    return taskNames;
 }
 
 // updates project in local storage
@@ -120,6 +121,10 @@ function storeTask(parentProjectID, taskID, taskObject) {
     }
 }
 
+function updateTask(projectID, taskID) {
+
+}
+
 // returns task object from local storage
 // returns task if successful, returns false if unsuccessful
 function getTask(parentProjectID, taskID) {
@@ -140,10 +145,6 @@ function getTask(parentProjectID, taskID) {
         return null;
     }
 }
-
-// updates task in localStorage
-// returns 0 if successful, returns 1 if unsuccessful
-function updateTask() {}
 
 // checks if task exists in localStorage
 // returns true if exists, returns false is does not exist
@@ -170,4 +171,5 @@ export {
     ifTaskExists,
     ifProjectExists,
     getTasks,
+    updateTask
 };
